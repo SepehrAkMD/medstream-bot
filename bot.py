@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
 
-TOKEN = os.getenv("8468267497:AAHWMeqnKuQwKDC-CWHVZcEZMpegVxzxA9A")  # TOKEN را از متغیر محیطی می‌خواند
+TOKEN = os.getenv("TOKEN")  # TOKEN را از متغیر محیطی می‌خواند
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
