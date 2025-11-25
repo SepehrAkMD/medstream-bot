@@ -1,23 +1,22 @@
-from telegram.ext import Updater, CommandHandler
+import logging
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+import os
 
-TOKEN = "8468267497:AAHWMeqnKuQwKDC-CWHVZcEZMpegVxzxA9A"
+TOKEN = os.getenv("8468267497:AAHWMeqnKuQwKDC-CWHVZcEZMpegVxzxA9A")  # TOKEN را از متغیر محیطی می‌خواند
 
-def start(update, context):
-    update.message.reply_text(
-        "سلام! 👋\n"
-        "من ربات مداستریم هستم.\n"
-        "برای شروع /start رو زدی و آماده‌ام!"
-    )
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("سلام! بات MedStream فعال است! 🚀")
 
 def main():
-    updater = Updater(TOKEN, use_context=True, request_kwargs={'read_timeout': 20, 'connect_timeout': 20})
-    dp = updater.dispatcher
-
-    dp.add_handler(CommandHandler("start", start))
-
-    print("بات در حال اجراست...")
-    updater.start_polling()
-    updater.idle()
+    app = ApplicationBuilder().token(TOKEN).build()  # بجای Updater
+    app.add_handler(CommandHandler("start", start))
+    app.run_polling()
 
 if __name__ == "__main__":
     main()
